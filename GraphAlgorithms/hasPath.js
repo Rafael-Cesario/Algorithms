@@ -14,6 +14,19 @@ const hasPath = (graph, root, target) => {
 	return false;
 };
 
+// Recursive
+// const hasPath = (graph, root, target) => {
+// 	if (root === target) return true;
+
+// 	for (let neighbor of graph[root]) {
+// 		if (hasPath(graph, neighbor, target) === true) {
+// 			return true;
+// 		}
+// 	}
+
+// 	return false;
+// };
+
 const graph = {
 	f: ['g', 'i'],
 	g: ['h'],
