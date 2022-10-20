@@ -2,6 +2,21 @@
 
 // Given the integer n, return the number of complete rows of the staircase you will build.
 
+// const arrangeCoins = (n) => {
+// 	let coins = n;
+// 	let rows = 0;
+
+// 	while (coins >= rows) {
+// 		coins = coins - (rows + 1);
+// 		if (coins >= 0) rows++;
+// 	}
+
+// 	return rows;
+// };
+
+// Better solution with binary search
+// Time = O(log n)
+
 const arrangeCoins = (n) => {
 	let l = 1;
 	let r = n;
@@ -12,8 +27,8 @@ const arrangeCoins = (n) => {
 		const coins = (mid / 2) * (mid + 1);
 
 		if (coins > n) r = mid - 1;
-    
-		if (coins < n) {
+
+		if (coins <= n) {
 			l = mid + 1;
 			result = Math.max(mid, result);
 		}
@@ -23,4 +38,6 @@ const arrangeCoins = (n) => {
 };
 
 console.log(arrangeCoins(5)); // 2
+console.log(arrangeCoins(6)); // 3
 console.log(arrangeCoins(8)); // 3
+console.log(arrangeCoins(15)); // 5
