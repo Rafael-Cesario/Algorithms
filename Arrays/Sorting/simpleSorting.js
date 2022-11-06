@@ -1,5 +1,5 @@
 // Simple sorting Algorithm
-// O (n log n)
+// O (n^2)
 
 const sortArray = (array) => {
 	const swap = (a, b) => {
