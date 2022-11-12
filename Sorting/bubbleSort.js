@@ -1,4 +1,4 @@
-// Buble sort
+// Bubble sort
 // o(n^2)
 
 const sortArray = (array) => {
