@@ -1,43 +1,21 @@
 // Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
 
-// Input: nums = [1, 2, 3, 1];
-// Output: true;
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
 
-// Input: nums = [1, 2, 3, 4];
-// Output: false;
+// Time Complexity O(n)
+// Space Complexity O(n)
+const containsDuplicate = (nums) => {
+	const map = new Set();
 
-// Input: nums = [1, 1, 1, 3, 3, 4, 3, 2, 4, 2];
-// Output: true;
+	for (number of nums) {
+		const isDuplicate = map.has(number);
+		if (isDuplicate) return true;
 
-// const containsDuplicate = (array) => {
-// 	let index = 0;
-// 	while (index < array.length) {
-// 		const current = array[index];
-
-// 		let index02 = index + 1;
-// 		while (index02 < array.length) {
-// 			if (current === array[index02]) return true;
-
-// 			index02++;
-// 		}
-
-// 		index++;
-// 	}
-
-// 	return false;
-// };
-
-const containsDuplicate = (array) => {
-	const set = new Set();
-
-	for (number of array) {
-		if (set.has(number)) return true;
-		set.add(number);
+		map.add(number);
 	}
 
 	return false;
 };
-
-console.log(containsDuplicate([1, 2, 3, 1])); // => true
-console.log(containsDuplicate([1, 2, 3, 4])); // => false
-console.log(containsDuplicate([1, 1, 1, 3, 3, 4, 3, 2, 4, 2])); // => true
