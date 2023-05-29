@@ -1,24 +1,15 @@
 var carFleet = function (target, position, speed) {
+	const sortedCars = position.map((position, index) => [position, speed[index]]).sort(([a], [b]) => b - a);
+
 	const times = [];
-	let answer = position.length;
 
-	const sortedPositions = position.map((position, index) => [position, speed[index]]).sort(([a], [b]) => a - b);
+	for (car of sortedCars) {
+		const [position, speed] = car;
+		const time = (target - position) / speed;
 
-	for (car in sortedPositions) {
-		const currentCar = sortedPositions[car];
-		const [position, speed] = currentCar;
-		const timeTillDestination = (target - position) / speed;
-
-		let isFasterThenPreviousCar = timeTillDestination >= times[times.length - 1];
-
-		while (times.length && isFasterThenPreviousCar) {
-			answer--;
-			times.pop();
-			isFasterThenPreviousCar = timeTillDestination >= times[times.length - 1];
-		}
-
-		times.push(timeTillDestination);
+		times.push(time);
+		if (times[times.length - 1] <= times[times.length - 2]) times.pop();
 	}
 
-	return answer;
+	return times.length;
 };
