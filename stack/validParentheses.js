@@ -6,29 +6,36 @@
 // Open brackets must be closed in the correct order.
 // Every close bracket has a corresponding open bracket of the same type.
 
-/**
- * @param {string} s
- * @return {boolean}
- */
-
-var isValid = function (s) {
-	const map = {
-		")": "(",
-		"]": "[",
-		"}": "{",
-	};
-
+const validParentheses = (string) => {
 	const stack = [];
 
-	for (bracket of s) {
-		const isOpenBracket = bracket === "(" ? true : bracket === "[" ? true : bracket === "{" ? true : false;
+	const brackets = {
+		'(': ')',
+		'[': ']',
+		'{': '}',
+	};
 
-		if (isOpenBracket) stack.push(bracket);
-		else {
+	for (let bracket of string) {
+		if (bracket.match(/[({[]/)) stack.push(bracket);
+
+		if (bracket.match(/[)}\]]/)) {
 			const lastBracket = stack.pop();
-			if (lastBracket !== map[bracket]) return false;
+
+			if (brackets[lastBracket] !== bracket) return false;
 		}
 	}
 
-	return stack.length ? false : true;
+	return stack.length === 0 ? true : false;
 };
+
+console.log(validParentheses('()'));
+// => true
+
+console.log(validParentheses('()[]{}'));
+// => true
+
+console.log(validParentheses('(]'));
+// => false
+
+console.log(validParentheses('({)}'));
+// => false

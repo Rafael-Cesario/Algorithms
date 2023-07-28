@@ -1,28 +1,27 @@
-// https://leetcode.com/problems/generate-parentheses/
+// Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
 
-var generateParenthesis = function (n) {
+const generateParenthesis = (n) => {
 	const stack = [];
-	const res = [];
+	const result = [];
 
-	const addParenthesis = (open, close) => {
-		if (open === close && open === n) {
-			res.push(stack.join(""));
-			return;
+	const generate = (openN, closeN) => {
+		if (openN === n && closeN === n) return result.push(stack.join(''));
+
+		if (openN < n) {
+      stack.push('(');
+			generate(openN + 1, closeN);
+      stack.pop();
 		}
 
-		if (open < n) {
-			stack.push("(");
-			addParenthesis(open + 1, close);
-			stack.pop();
-		}
-
-		if (close < open) {
-			stack.push(")");
-			addParenthesis(open, close + 1);
-			stack.pop();
+		if (closeN < openN) {
+      stack.push(')');
+			generate(openN, closeN + 1);
+      stack.pop();
 		}
 	};
 
-	addParenthesis(0, 0);
-	return res;
+	generate(0, 0);
+	return result;
 };
+
+console.log(generateParenthesis(3));

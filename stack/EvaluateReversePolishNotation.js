@@ -1,27 +1,43 @@
-// https://leetcode.com/problems/evaluate-reverse-polish-notation/
+// Evaluate the value of an arithmetic expression in Reverse Polish Notation.
 
-var evalRPN = function (tokens) {
+// Valid operators are +, -, *, and /. Each operand may be an integer or another expression.
+
+// Note that division between two integers should truncate toward zero.
+
+// It is guaranteed that the given RPN expression is always valid. That means the expression would always evaluate to a result, and there will not be any division by zero operation.
+
+const evalRPN = (tokens) => {
 	const stack = [];
 
-	const operators = {
-		"+": (a, b) => a + b,
-		"-": (a, b) => a - b,
-		"*": (a, b) => a * b,
-		"/": (a, b) => Math.trunc(a / b),
-	};
+	for (let i = 0; i < tokens.length; i++) {
+		switch (tokens[i]) {
+			case '+':
+				stack.push(stack.pop() + stack.pop());
+				break;
 
-	for (t of tokens) {
-		const isOperator = t in operators;
+			case '-':
+				let a = stack.pop();
+				let b = stack.pop();
+				stack.push(b - a);
+				break;
 
-		if (isOperator) {
-			const [v1, v2] = [stack.pop(), stack.pop()];
-			const sum = operators[t](Number(v2), Number(v1));
-			stack.push(sum);
-			continue;
+			case '*':
+				stack.push(stack.pop() * stack.pop());
+				break;
+
+			case '/':
+				let aa = stack.pop();
+				let bb = stack.pop();
+				stack.push(parseInt(bb / aa));
+				break;
+
+			default:
+				stack.push(Number(tokens[i]));
+        break;
 		}
-
-		stack.push(t);
 	}
 
-	return stack.pop();
+	return stack[0];
 };
+
+console.log(evalRPN(['2', '1', '+', '3', '*']));
